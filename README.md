@@ -1,4 +1,4 @@
-# Project Overview -LAMP Stack on AWS using Terraform
+# LAMP Stack on AWS using Terraform
 
 This project implements a LAMP (Linux, Apache, MySQL, PHP) stack on AWS using Terraform as a proof-of-concept (PoC) for a technical assessment. The solution prioritizes automation, security, and reliability.
 
