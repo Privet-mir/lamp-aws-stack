@@ -1,0 +1,29 @@
+# Example Terraform variables file
+# Copy this file to terraform.tfvars and customize the values
+
+# AWS Configuration
+aws_region = "eu-central-1"
+
+# Project Configuration
+project_name = "lamp-stack"
+
+# Network Configuration (used by terraform-aws-modules/vpc/aws)
+vpc_cidr = "10.0.0.0/16"
+public_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.10.0/24", "10.0.20.0/24"]
+
+# EC2 Configuration
+instance_type = "t3.micro"
+
+# RDS Configuration
+db_instance_class = "db.t3.micro"
+db_allocated_storage = 20
+db_max_allocated_storage = 100
+
+# Database Configuration
+db_name = "lampdb"
+db_username = "admin"
+
+# Remote backend (S3) - REQUIRED for CI/CD and team use
+backend_bucket_name     = "assesment-sfeh123rasf1sdfa111"
+backend_state_key       = "fugro-assessment/terraform.tfstate"
