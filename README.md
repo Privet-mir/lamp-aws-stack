@@ -18,13 +18,13 @@ This project implements a LAMP (Linux, Apache, MySQL, PHP) stack on AWS using Te
 The infrastructure includes a VPC with public and private subnet, an EC2 instance, an Application Load Balancer, an RDS MySQL instance, and security controls. See [Detailed Architecture Decision Record](docs/ADR.md) for specifics.
 
 ### App Workflow
-1. When a change is pushed to the GitHub repository, the GitHub Actions pipeline automatically runs the Terraform workflow to plan and deploy infrastructure resources on AWS.
-2. After the EC2 instance is created, the user_data.sh script runs on first boot to install Apache and PHP, configure the LAMP stack, and create the required HTML and PHP files under /var/www/html.
-3. The RDS database password is securely stored in AWS Secrets Manager and fetched at runtime by the user_data.sh script, which injects it into the sample_app.php file for database connectivity.
+1. When a change is pushed to the GitHub repository, the **GitHub Actions pipeline** automatically runs the Terraform workflow to plan and deploy infrastructure resources on AWS.
+2. After the EC2 instance is created, the **user_data.sh** script runs on first boot to install **Apache** and **PHP**, configure the **LAMP stack**, and create the required HTML and **PHP files under /var/www/html**.
+3. The RDS **database password** is securely stored in AWS **Secrets Manager** and fetched at runtime by the user_data.sh script, which injects it into the sample_app.php file for database connectivity.
 4. The Application Load Balancer (ALB) in the public subnet routes external traffic to the EC2 instance over its private IP.
 5. Accessing the ALB DNS name (e.g., http://lamp-stack-alb-xxxx.elb.amazonaws.com) displays the default homepage.
-6. Clicking the “Fugro Application” link on the homepage opens sample_app.php, which queries the RDS MySQL database and displays a message retrieved from it.
-7. The /health.php endpoint provides a JSON response and is used for ALB health checks.
+6. Clicking the **“Fugro Application”** link on the homepage opens sample_app.php, which queries the RDS MySQL database and **displays a message** retrieved from it.
+7. The /health.php endpoint provides a JSON response and is used for **ALB health checks**.
 
 ## Prerequisites
 
@@ -117,7 +117,7 @@ Enter the following when prompted:
 - Default region name: `eu-central-1` (or your preferred region)
 - Default output format: `json`
 
-### Step 5: Terraform AWS Provider Configuration
+### Step 5: Deployment from local
 
 Terraform will automatically use your AWS CLI configuration. No additional provider configuration is needed in your Terraform files.
 
@@ -193,9 +193,9 @@ The Terraform configuration creates the following AWS resources:
 - 1 VPC (via terraform-aws-modules/vpc/aws)
 - 1 Internet Gateway (via VPC module)
 - 1 NAT Gateway (via VPC module)
-- 1 Public Subnet (eu-central-1a, via VPC module)
-- 1 Private Subnet (eu-central-1a, via VPC module)
-- 1 Route Tables (public and private, via VPC module)
+- 2 Public Subnet (eu-central-1a, via VPC module)
+- 2 Private Subnet (eu-central-1a, via VPC module)
+- 2 Route Tables (public and private, via VPC module)
 - 4 Security Groups (VPC endpoints, ALB, web server, and database)
 - 1 DB Subnet Group
 - 1 RDS MySQL Instance
